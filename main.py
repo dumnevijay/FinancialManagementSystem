@@ -1,6 +1,7 @@
 from tkinter import *
 from PIL import ImageTk,Image
 from addPerson import addNewPerson
+from individual import individualClass
 
 
 class FinancierApp:
@@ -40,7 +41,7 @@ class FinancierApp:
 
         #=============buttons on left side====================
         lbl_add_person = Button(LeftMenu,text="Add Person",command=self.addPerson,font=('time new roman', 15,"bold"),bg='white',bd=3,cursor='hand2').pack(side=TOP,fill=X)
-        lbl_individual = Button(LeftMenu,text="Individual",font=('time new roman', 15,"bold"),bg='white',bd=3,cursor='hand2').pack(side=TOP,fill=X)
+        lbl_individual = Button(LeftMenu,text="Individual",command=self.individual,font=('time new roman', 15,"bold"),bg='white',bd=3,cursor='hand2').pack(side=TOP,fill=X)
         lbl_partner = Button(LeftMenu,text="Partner",font=('time new roman', 15,"bold"),bg='white',bd=3,cursor='hand2').pack(side=TOP,fill=X)
         lbl_unpaid = Button(LeftMenu,text="Unpaid",font=('time new roman', 15,"bold"),bg='white',bd=3,cursor='hand2').pack(side=TOP,fill=X)
         lbl_monthly = Button(LeftMenu,text="Monthly Report",font=('time new roman', 15,"bold"),bg='white',bd=3,cursor='hand2').pack(side=TOP,fill=X)
@@ -67,6 +68,9 @@ class FinancierApp:
         self.new_win = Toplevel(self.root)
         self.new_obj = addNewPerson(self.new_win)
 
+    def individual(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = individualClass(self.new_win)
 
 if __name__ == "__main__":
     root = Tk()

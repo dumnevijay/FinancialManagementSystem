@@ -5,7 +5,7 @@ import mysql.connector
 from mysql.connector import Error
 
 
-class addNewPerson:
+class individualClass:
     def __init__(self, root):
         self.root = root
         self.root.geometry("1300x700+30+10")
@@ -408,5 +408,5 @@ class addNewPerson:
 
 if __name__ == "__main__":
     root = Tk()
-    obj = addNewPerson(root)
+    obj = individualClass(root)
     root.mainloop()

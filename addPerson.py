@@ -29,7 +29,7 @@ class addNewPerson:
         self.var_amount=StringVar()
         self.var_months=StringVar()
         self.var_issuedate=StringVar()
-        self.var_repaydate=StringVar()
+        self.var_lastdate=StringVar()
         self.var_proofs=StringVar()
         
 
@@ -85,7 +85,7 @@ class addNewPerson:
         lbl_acctype=Label(self.root,text="Account Type",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=775,y=150)
         lbl_amount=Label(self.root,text="Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=775,y=200)
         lbl_months=Label(self.root,text="Months",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=775,y=250)
-        lbl_repaydate=Label(self.root,text="Repay Date",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=775,y=300)
+        lbl_Lastdate=Label(self.root,text="Last Date",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=775,y=300)
 
         
         cmb_acctype=ttk.Combobox(self.root,textvariable=self.var_acc_type,values=("Select","Daily","Monthly","Yearly"),state="readonly",justify=CENTER,font=("goudy old style",13))
@@ -93,7 +93,7 @@ class addNewPerson:
         cmb_acctype.current(0)
         txt_amount=Entry(self.root,textvariable=self.var_amount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=925,y=200)
         txt_months=Entry(self.root,textvariable=self.var_months,font=("goudy old style",15,"bold"),bg="lightblue").place(x=925,y=250)
-        txt_repaydate=Entry(self.root,textvariable=self.var_repaydate,font=("goudy old style",15,"bold"),bg="lightblue").place(x=925,y=300)
+        txt_Lastdate=Entry(self.root,textvariable=self.var_lastdate,font=("goudy old style",15,"bold"),bg="lightblue").place(x=925,y=300)
 
 
         #========address field=================
@@ -116,7 +116,7 @@ class addNewPerson:
         cus_frame.place(x=0,y=480,relwidth=1,height=205)
         scrolly=Scrollbar(cus_frame,orient=VERTICAL)
         scrollx=Scrollbar(cus_frame,orient=HORIZONTAL)
-        self.CustomerTable=ttk.Treeview(cus_frame,columns=("ID","CustomerName","Gender","SuretyName","PhoneNumber","AlternateNumber","AccountType","Amount","Months","IssueDate","RepayDate","Proofs","Address"),yscrollcommand=scrolly.set,xscrollcommand=scrollx.set)
+        self.CustomerTable=ttk.Treeview(cus_frame,columns=("ID","CustomerName","Gender","SuretyName","PhoneNumber","AlternateNumber","AccountType","Amount","Months","IssueDate","LastDate","Proofs","Address"),yscrollcommand=scrolly.set,xscrollcommand=scrollx.set)
         scrollx.pack(side=BOTTOM,fill=X)
         scrolly.pack(side=RIGHT,fill=Y)
         scrollx.config(command=self.CustomerTable.xview)
@@ -134,7 +134,7 @@ class addNewPerson:
         self.CustomerTable.heading("Amount",text="Amount")
         self.CustomerTable.heading("Months",text="Months")
         self.CustomerTable.heading("IssueDate",text="Issue Date")
-        self.CustomerTable.heading("RepayDate",text="Repay Date")
+        self.CustomerTable.heading("LastDate",text="Last Date")
         self.CustomerTable.heading("Proofs",text="Proofs")
         self.CustomerTable.heading("Address",text="Address")
         self.CustomerTable["show"]="headings"
@@ -143,18 +143,18 @@ class addNewPerson:
 
         #================headings width setting==========
         self.CustomerTable.column("ID",width=70)
-        self.CustomerTable.column("CustomerName",width=130)
+        self.CustomerTable.column("CustomerName",width=180)
         self.CustomerTable.column("Gender",width=80)
-        self.CustomerTable.column("SuretyName",width=130)
+        self.CustomerTable.column("SuretyName",width=180)
         self.CustomerTable.column("PhoneNumber",width=110)
         self.CustomerTable.column("AlternateNumber",width=110)
         self.CustomerTable.column("AccountType",width=90)
         self.CustomerTable.column("Amount",width=150)
         self.CustomerTable.column("Months",width=80)
         self.CustomerTable.column("IssueDate",width=100)
-        self.CustomerTable.column("RepayDate",width=100)
+        self.CustomerTable.column("LastDate",width=100)
         self.CustomerTable.column("Proofs",width=100)
-        self.CustomerTable.column("Address",width=150)
+        self.CustomerTable.column("Address",width=200)
         self.CustomerTable.pack(fill=BOTH,expand=1)
         self.CustomerTable.bind("<ButtonRelease-1>",self.get_data)
 
@@ -186,7 +186,7 @@ class addNewPerson:
                         if row!=None:
                             messagebox.showerror("Error","This Customer Id already assigned, try a different one",parent=self.root)
                         else:
-                            cursor.execute("Insert into Customers (ID,CustomerName,Gender,SuretyName,PhoneNumber,AlternateNumber,AccountType,Amount,Months,IssueDate,RepayDate,Proofs,Address) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
+                            cursor.execute("Insert into Customers (ID,CustomerName,Gender,SuretyName,PhoneNumber,AlternateNumber,AccountType,Amount,Months,IssueDate,LastDate,Proofs,Address) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
                                             self.var_cus_id.get(),
                                             self.var_name.get(),
                                             self.var_gender.get(),
@@ -197,7 +197,7 @@ class addNewPerson:
                                             self.var_amount.get(),
                                             self.var_months.get(),
                                             self.var_issuedate.get(),
-                                            self.var_repaydate.get(),
+                                            self.var_lastdate.get(),
                                             self.var_proofs.get(),
                                             self.txt_address.get('1.0',END)
 
@@ -257,7 +257,7 @@ class addNewPerson:
         self.var_amount.set(row[7])
         self.var_months.set(row[8])
         self.var_issuedate.set(row[9])
-        self.var_repaydate.set(row[10])
+        self.var_lastdate.set(row[10])
         self.var_proofs.set(row[11])
         self.txt_address.delete('1.0',END)
         self.txt_address.insert(END,row[12])
@@ -289,7 +289,7 @@ class addNewPerson:
                         if row==None:
                             messagebox.showerror("Error","Invalid Customer Id Please try correct one",parent=self.root)
                         else:
-                            cursor.execute('update Customers set CustomerName=%s,Gender=%s,SuretyName=%s,PhoneNumber=%s,AlternateNumber=%s,AccountType=%s,Amount=%s,Months=%s,IssueDate=%s,RepayDate=%s,Proofs=%s,Address=%s where ID=%s',(
+                            cursor.execute('update Customers set CustomerName=%s,Gender=%s,SuretyName=%s,PhoneNumber=%s,AlternateNumber=%s,AccountType=%s,Amount=%s,Months=%s,IssueDate=%s,LastDate=%s,Proofs=%s,Address=%s where ID=%s',(
                                             self.var_name.get(),
                                             self.var_gender.get(),
                                             self.var_surety_name.get(),
@@ -299,7 +299,7 @@ class addNewPerson:
                                             self.var_amount.get(),
                                             self.var_months.get(),
                                             self.var_issuedate.get(),
-                                            self.var_repaydate.get(),
+                                            self.var_lastdate.get(),
                                             self.var_proofs.get(),
                                             self.txt_address.get('1.0',END),
                                             self.var_cus_id.get()
@@ -365,7 +365,7 @@ class addNewPerson:
         self.var_amount.set("")
         self.var_months.set("")
         self.var_issuedate.set("")
-        self.var_repaydate.set("")
+        self.var_lastdate.set("")
         self.var_proofs.set("")
         self.txt_address.delete('1.0',END)
         self.var_searchby.set("Select")
