@@ -16,21 +16,28 @@ class individualClass:
         #=========================
         # All Variables
 
-        self.var_searchby=StringVar()
-        self.var_searchtxt=StringVar()
-
-        self.var_cus_id=StringVar()
-        self.var_name=StringVar()
-        self.var_gender=StringVar()
-        self.var_surety_name=StringVar()
-        self.var_phone_no=StringVar()
-        self.var_alter_no=StringVar()
-        self.var_acc_type=StringVar()
-        self.var_amount=StringVar()
-        self.var_months=StringVar()
-        self.var_issuedate=StringVar()
-        self.var_lastdate=StringVar()
-        self.var_proofs=StringVar()
+        self.var_SerialNo=StringVar()
+        self.var_CustomerName=StringVar()
+        self.var_SuretyName=StringVar()
+        self.var_PrincipleAmounat=StringVar()
+        self.var_BarrowAmount=StringVar()
+        self.var_IssueDateEMI=StringVar()
+        self.var_LastDateEMI=StringVar()
+        self.var_DaysRunning=StringVar()
+        self.var_DaysPaid=StringVar()
+        self.var_DaysBalance=StringVar()
+        self.var_Due=StringVar()
+        self.var_PresentBalance=StringVar()
+        self.var_ExtraPay=StringVar()
+        self.var_TotalPaidAmount=StringVar()
+        self.var_TotalBalance=StringVar()
+        self.var_PaperCharges=StringVar()
+        self.var_PenaltyAmount=StringVar()
+        self.var_Rate=StringVar()
+        self.var_OriginalAmountTotal=StringVar()
+        self.var_Profit=StringVar()
+        self.var_Loss=StringVar()
+        self.var_Status=StringVar()
         
 
         #========searchFrame=================
@@ -116,7 +123,34 @@ class individualClass:
         cus_frame.place(x=0,y=480,relwidth=1,height=205)
         scrolly=Scrollbar(cus_frame,orient=VERTICAL)
         scrollx=Scrollbar(cus_frame,orient=HORIZONTAL)
-        self.CustomerTable=ttk.Treeview(cus_frame,columns=("ID","CustomerName","Gender","SuretyName","PhoneNumber","AlternateNumber","AccountType","Amount","Months","IssueDate","LastDate","Proofs","Address"),yscrollcommand=scrolly.set,xscrollcommand=scrollx.set)
+        self.CustomerTable=ttk.Treeview(cus_frame,columns=("SerialNo","CustomerName","SuretyName","PrincipleAmounat","BarrowAmount","IssueDateEMI","LastDateEMI","DaysRunning","DaysPaid","DaysBalance","Due","PresentBalance","ExtraPay","TotalPaidAmount","TotalBalance","PaperCharges","PenaltyAmount","Rate","OriginalAmountTotal","Profit","Loss","Status"),yscrollcommand=scrolly.set,xscrollcommand=scrollx.set)
+        """
+            CREATE TABLE IF NOT EXISTS Transactions (
+                SerialNo INT AUTO_INCREMENT,
+                CustomerName TEXT,
+                SuretyName TEXT,
+                PrincipleAmounat TEXT,
+                BarrowAmount TEXT,
+                IssueDateEMI TEXT,
+                LastDateEMI TEXT,
+                DaysRunning TEXT,
+                DaysPaid TEXT,
+                DaysBalance TEXT,
+                Due TEXT,
+                PresentBalance TEXT,
+                ExtraPay TEXT,
+                TotalPaidAmount TEXT,
+                TotalBalance TEXT,
+                PaperCharges TEXT,
+                PenaltyAmount TEXT,
+                Rate TEXT,
+                OriginalAmountTotal TEXT,
+                Profit TEXT,
+                Loss TEXT,
+                Status TEXT,
+                PRIMARY KEY (SerialNo)
+            )
+            """
         scrollx.pack(side=BOTTOM,fill=X)
         scrolly.pack(side=RIGHT,fill=Y)
         scrollx.config(command=self.CustomerTable.xview)

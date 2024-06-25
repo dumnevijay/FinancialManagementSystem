@@ -1,0 +1,22 @@
+SerialNo INT AUTO_INCREMENT,
+CustomerName
+SuretyName
+PrincipleAmounat
+BarrowAmount
+IssueDateEMI
+LastDateEMI
+DaysRunning
+DaysPaid
+DaysBalance
+Due
+PresentBalance
+ExtraPay
+TotalPaidAmount
+TotalBalance
+PaperCharges
+PenaltyAmount
+Rate
+OriginalAmountTotal
+Profit
+Loss
+Status

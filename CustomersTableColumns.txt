@@ -1,0 +1,13 @@
+ID INT AUTO_INCREMENT,
+CustomerName TEXT,
+Gender TEXT,
+SuretyName TEXT,
+PhoneNumber TEXT,
+AlternateNumber TEXT,
+AccountType TEXT,
+Amount TEXT,
+Months TEXT,
+IssueDate TEXT,
+RepayDate TEXT,
+Proofs TEXT,
+Address TEXT

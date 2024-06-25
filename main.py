@@ -29,7 +29,6 @@ class FinancierApp:
         self.left_Menu_Logo = ImageTk.PhotoImage(self.left_Menu_Logo)
         LeftMenu = Frame(self.root,bd=2,relief=RIDGE,bg="skyblue")
         LeftMenu.place(x=0,y=102,width=200,height=600)
-
         lbl_menulogo = Label(LeftMenu,image=self.left_Menu_Logo)
         lbl_menulogo.pack(side=TOP,fill=X)
 
