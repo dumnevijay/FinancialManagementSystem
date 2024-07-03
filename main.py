@@ -2,6 +2,7 @@ from tkinter import *
 from PIL import ImageTk,Image
 from addPerson import addNewPerson
 from individual import individualClass
+from datetime import datetime
 
 
 class FinancierApp:
@@ -18,10 +19,11 @@ class FinancierApp:
         #=============btn_logout====================
         btn_logout = Button(self.root, text="LogOut", font=('time new roman', 15, "bold"),bg='yellow',cursor='hand2').place(x=1150,y=12,height=45,width=130)
 
-
-        #=============clock====================
-        self.labl_clock = Label(self.root,text="Welcome Financier Management System\t\t Date: DD-MM-YYYY\t\t Time: HH:MM:SS",font=("times new roman",15),bg='lightblue',fg='white')
+        #=============Clock====================
+        self.labl_clock = Label(self.root,font=("times new roman",15),bg='lightblue',fg='white')
         self.labl_clock.place(x=0,y=70,relwidth=1,height=30)
+
+
 
         #=============left_menu====================
         self.left_Menu_Logo=Image.open("images\MenuLogo.png")
@@ -62,6 +64,21 @@ class FinancierApp:
         #=============fotter====================
         lbl_footer = Label(self.root,text="FMS Financier Management System |  Developed by VIJAY & GEETHA \nFor any Technical Issue Contact : 1234567890",font=("times new roman",12),bg='#4d636d',fg='white').pack(side=BOTTOM,fill=X)
 
+    def update_clock(self):
+         #=============clock====================
+        # Get the current date
+        current_date = datetime.now()
+        # Format the date as a string
+        date_string = current_date.strftime("%d-%m-%Y")
+        time_string = current_date.strftime("%H:%M:%S %p")
+        self.labl_clock.config(text=f"Date : {date_string}  Time : {time_string}")
+        self.labl_clock.after(1000, update_clock)
+
+        
+
+        
+
+
     #====================calling employee class with object ======================================
     def addPerson(self):
         self.new_win = Toplevel(self.root)
@@ -74,7 +91,10 @@ class FinancierApp:
 if __name__ == "__main__":
     root = Tk()
     obj = FinancierApp(root)
+    update_clock(self)
     root.mainloop()
+
+
 
 
 
