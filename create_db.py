@@ -66,8 +66,41 @@ def create_db():
                 PRIMARY KEY (SerialNo)
             )
             """
+
+            create_main_table_query = """
+            CREATE TABLE IF NOT EXISTS Main (
+                AccountId INT AUTO_INCREMENT,
+                CustomerName VARCHAR(100),
+                CustomerMobile VARCHAR(100),
+                SuretyName VARCHAR(100),
+                PrincipleAmount VARCHAR(100),
+                Months VARCHAR(100),
+                ToatalAmount VARCHAR(100),
+                IssueDate VARCHAR(100),
+                LastDate VARCHAR(100),
+                EMI VARCHAR(100),
+                PayingAmount VARCHAR(100),
+                BalanceAmount VARCHAR(100),
+                TotalAmountPaid VARCHAR(100),
+                Balance VARCHAR(100),
+                TotalMonthsPaid VARCHAR(100),
+                PaperCharges VARCHAR(100),
+                ExtraPay VARCHAR(100),
+                TotalExtra VARCHAR(100),
+                OriginalAmount VARCHAR(100),
+                PenalityAmount VARCHAR(100),
+                TotalProfit VARCHAR(100),
+                TotalLoss VARCHAR(100),
+                Status VARCHAR(100),
+                Proofs VARCHAR(100),
+                PRIMARY KEY (AccountId)
+            )
+            """
+
             cursor.execute(create_table_query)
             cursor.execute(create_transaction_table_query)
+            cursor.execute(create_main_table_query)
+
             
     except Error as e:
         messagebox.showerror(f"Error: 'database error {e}'")

@@ -18,7 +18,7 @@ class addNewPerson:
 
         self.var_searchby=StringVar()
         self.var_searchtxt=StringVar()
-
+'''
         self.var_cus_id=StringVar()
         self.var_name=StringVar()
         self.var_gender=StringVar()
@@ -30,7 +30,32 @@ class addNewPerson:
         self.var_months=StringVar()
         self.var_issuedate=StringVar()
         self.var_lastdate=StringVar()
-        self.var_proofs=StringVar()
+        self.var_proofs=StringVar() '''
+
+        self.var_AccountId=StringVar()
+        self.var_CustomerName=StringVar()
+        self.var_CustomerMobile=StringVar()
+        self.var_SuretyName=StringVar()
+        self.var_PrincipleAmount=StringVar()
+        self.var_Months=StringVar()
+        self.var_ToatalAmount=StringVar()
+        self.var_IssueDate=StringVar()
+        self.var_LastDate=StringVar()
+        self.var_EMI=StringVar()
+        self.var_PayingAmount=StringVar()
+        self.var_BalanceAmount=StringVar()
+        self.var_TotalAmountPaid=StringVar()
+        self.var_Balance=StringVar()
+        self.var_TotalMonthsPaid=StringVar()
+        self.var_PaperCharges=StringVar()
+        self.var_ExtraPay=StringVar()
+        self.var_TotalExtra=StringVar()
+        self.var_OriginalAmount=StringVar()
+        self.var_PenalityAmount=StringVar()
+        self.var_TotalProfit=StringVar()
+        self.var_TotalLoss=StringVar()
+        self.var_Status=StringVar()
+
         
 
         #========searchFrame=================
