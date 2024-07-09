@@ -18,7 +18,7 @@ class addNewPerson:
 
         self.var_searchby=StringVar()
         self.var_searchtxt=StringVar()
-'''
+        '''
         self.var_cus_id=StringVar()
         self.var_name=StringVar()
         self.var_gender=StringVar()
@@ -84,9 +84,9 @@ class addNewPerson:
         lbl_cusname=Label(self.root,text="Customer Name",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=200)
         lbl_suretyname=Label(self.root,text="Surety Name",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=250)
 
-        txt_cusid=Entry(self.root,textvariable=self.var_cus_id,font=("goudy old style",15,"bold"),bg="lightblue").place(x=200,y=150)
-        txt_cusname=Entry(self.root,textvariable=self.var_name,font=("goudy old style",15,"bold"),bg="lightblue").place(x=200,y=200)
-        txt_suretyname=Entry(self.root,textvariable=self.var_surety_name,font=("goudy old style",15,"bold"),bg="lightblue").place(x=200,y=250)
+        txt_cusid=Entry(self.root,textvariable=self.var_AccountId,font=("goudy old style",15,"bold"),bg="lightblue").place(x=200,y=150)
+        txt_cusname=Entry(self.root,textvariable=self.var_CustomerName,font=("goudy old style",15,"bold"),bg="lightblue").place(x=200,y=200)
+        txt_suretyname=Entry(self.root,textvariable=self.var_SuretyName,font=("goudy old style",15,"bold"),bg="lightblue").place(x=200,y=250)
 
 
         #========column_2=================
@@ -149,37 +149,84 @@ class addNewPerson:
 
 
         #================headings to show on screen==========
-        self.CustomerTable.heading("ID",text="ID")
+        self.CustomerTable.heading("AccountId",text="AccountId")
         self.CustomerTable.heading("CustomerName",text="Customer Name")
-        self.CustomerTable.heading("Gender",text="Gender")
+        self.CustomerTable.heading("CustomerMobile",text="CustomerMobile")
         self.CustomerTable.heading("SuretyName",text="Surety Name")
-        self.CustomerTable.heading("PhoneNumber",text="Phone Number")
-        self.CustomerTable.heading("AlternateNumber",text="Alternate Number")
-        self.CustomerTable.heading("AccountType",text="Account Type")
-        self.CustomerTable.heading("Amount",text="Amount")
+        self.CustomerTable.heading("PrincipleAmount",text="PrincipleAmount")
         self.CustomerTable.heading("Months",text="Months")
-        self.CustomerTable.heading("IssueDate",text="Issue Date")
+        self.CustomerTable.heading("ToatalAmount",text="ToatalAmount")
+        self.CustomerTable.heading("IssueDate",text="IssueDate")
         self.CustomerTable.heading("LastDate",text="Last Date")
+        self.CustomerTable.heading("EMI",text="PayingAmount")
+        self.CustomerTable.heading("PayingAmount",text="EMI")
+        self.CustomerTable.heading("BalanceAmount",text="BalanceAmount")
+        self.CustomerTable.heading("TotalAmountPaid",text="TotalAmountPaid")
+        self.CustomerTable.heading("Balance",text="Balance")
+        self.CustomerTable.heading("TotalMonthsPaid",text="TotalMonthsPaid")
+        self.CustomerTable.heading("PaperCharges",text="PaperCharges")
+        self.CustomerTable.heading("ExtraPay",text="ExtraPay")
+        self.CustomerTable.heading("TotalExtra",text="TotalExtra")
+        self.CustomerTable.heading("OriginalAmount",text="OriginalAmount")
+        self.CustomerTable.heading("PenalityAmount",text="PenalityAmount")
+        self.CustomerTable.heading("TotalProfit",text="TotalProfit")
+        self.CustomerTable.heading("TotalLoss",text="TotalLoss")
+        self.CustomerTable.heading("Status",text="Status")
         self.CustomerTable.heading("Proofs",text="Proofs")
-        self.CustomerTable.heading("Address",text="Address")
         self.CustomerTable["show"]="headings"
         
+        '''AccountId
+        CustomerName
+        CustomerMobile
+        SuretyName
+        PrincipleAmount
+        Months
+        ToatalAmount
+        IssueDate
+        LastDate
+        EMI
+        PayingAmount
+        BalanceAmount
+        TotalAmountPaid
+        Balance
+        TotalMonthsPaid
+        PaperCharges
+        ExtraPay
+        TotalExtra
+        OriginalAmount
+        PenalityAmount
+        TotalProfit
+        TotalLoss
+        Status
+        Proofs'''
+        '''AccountId,CustomerName,CustomerMobile,SuretyName,PrincipleAmount,Months,ToatalAmount,IssueDate,LastDate,EMI,PayingAmount,BalanceAmount,TotalAmountPaid,Balance,TotalMonthsPaid,PaperCharges,ExtraPay,TotalExtra,OriginalAmount,PenalityAmount,TotalProfit,TotalLoss,Status,Proofs'''
 
 
         #================headings width setting==========
-        self.CustomerTable.column("ID",width=70)
+        self.CustomerTable.column("AccountId",width=70)
         self.CustomerTable.column("CustomerName",width=180)
-        self.CustomerTable.column("Gender",width=80)
+        self.CustomerTable.column("CustomerMobile",width=80)
         self.CustomerTable.column("SuretyName",width=180)
-        self.CustomerTable.column("PhoneNumber",width=110)
-        self.CustomerTable.column("AlternateNumber",width=110)
-        self.CustomerTable.column("AccountType",width=90)
-        self.CustomerTable.column("Amount",width=150)
-        self.CustomerTable.column("Months",width=80)
+        self.CustomerTable.column("PrincipleAmount",width=110)
+        self.CustomerTable.column("Months",width=110)
+        self.CustomerTable.column("ToatalAmount",width=90)
         self.CustomerTable.column("IssueDate",width=100)
         self.CustomerTable.column("LastDate",width=100)
-        self.CustomerTable.column("Proofs",width=100)
-        self.CustomerTable.column("Address",width=200)
+        self.CustomerTable.column("EMI",width=150)
+        self.CustomerTable.column("PayingAmount",width=80)
+        self.CustomerTable.column("BalanceAmount",width=100)
+        self.CustomerTable.column("TotalAmountPaid",width=200)
+        self.CustomerTable.column("Balance",width=200)
+        self.CustomerTable.column("TotalMonthsPaid",width=200)
+        self.CustomerTable.column("PaperCharges",width=200)
+        self.CustomerTable.column("ExtraPay",width=200)
+        self.CustomerTable.column("TotalExtra",width=200)
+        self.CustomerTable.column("OriginalAmount",width=200)
+        self.CustomerTable.column("PenalityAmount",width=200)
+        self.CustomerTable.column("TotalProfit",width=200)
+        self.CustomerTable.column("TotalLoss",width=200)
+        self.CustomerTable.column("Status",width=200)
+        self.CustomerTable.column("Proofs",width=200)
         self.CustomerTable.pack(fill=BOTH,expand=1)
         self.CustomerTable.bind("<ButtonRelease-1>",self.get_data)
 
@@ -203,28 +250,38 @@ class addNewPerson:
                 try:
 
                     # Execute the query
-                    if self.var_cus_id.get()=="":
+                    if self.var_AccountId.get()=="":
                         messagebox.showerror("Error",f"Customer Id should be required",parent=self.root)
                     else:
-                        cursor.execute("select * from Customers where ID=%s",(self.var_cus_id.get(),))
+                        cursor.execute("select * from Main where ID=%s",(self.var_AccountId.get(),))
                         row=cursor.fetchone()
                         if row!=None:
                             messagebox.showerror("Error","This Customer Id already assigned, try a different one",parent=self.root)
                         else:
-                            cursor.execute("Insert into Customers (ID,CustomerName,Gender,SuretyName,PhoneNumber,AlternateNumber,AccountType,Amount,Months,IssueDate,LastDate,Proofs,Address) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
-                                            self.var_cus_id.get(),
-                                            self.var_name.get(),
-                                            self.var_gender.get(),
-                                            self.var_surety_name.get(),
-                                            self.var_phone_no.get(),
-                                            self.var_alter_no.get(),
-                                            self.var_acc_type.get(),
-                                            self.var_amount.get(),
-                                            self.var_months.get(),
-                                            self.var_issuedate.get(),
-                                            self.var_lastdate.get(),
-                                            self.var_proofs.get(),
-                                            self.txt_address.get('1.0',END)
+                            cursor.execute("Insert into Main (AccountId,CustomerName,CustomerMobile,SuretyName,PrincipleAmount,Months,ToatalAmount,IssueDate,LastDate,EMI,PayingAmount,BalanceAmount,TotalAmountPaid,Balance,TotalMonthsPaid,PaperCharges,ExtraPay,TotalExtra,OriginalAmount,PenalityAmount,TotalProfit,TotalLoss,Status,Proofs) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
+                                        self.var_AccountId.get(),
+                                        self.var_CustomerName.get(),
+                                        self.var_CustomerMobile.get(),
+                                        self.var_SuretyName.get(),
+                                        self.var_PrincipleAmount.get(),
+                                        self.var_Months.get(),
+                                        self.var_ToatalAmount.get(),
+                                        self.var_IssueDate.get(),
+                                        self.var_LastDate.get(),
+                                        self.var_EMI.get(),
+                                        self.var_PayingAmount.get(),
+                                        self.var_BalanceAmount.get(),
+                                        self.var_TotalAmountPaid.get(),
+                                        self.var_Balance.get(),
+                                        self.var_TotalMonthsPaid.get(),
+                                        self.var_PaperCharges.get(),
+                                        self.var_ExtraPay.get(),
+                                        self.var_TotalExtra.get(),
+                                        self.var_OriginalAmount.get(),
+                                        self.var_PenalityAmount.get(),
+                                        self.var_TotalProfit.get(),
+                                        self.var_TotalLoss.get(),
+                                        self.var_Status.get()
 
                             ))
                             con.commit()
@@ -255,7 +312,7 @@ class addNewPerson:
                 try:
 
                     # Execute the query
-                    cursor.execute("select * from Customers")
+                    cursor.execute("select * from Main")
                     rows=cursor.fetchall()
                     self.CustomerTable.delete(*self.CustomerTable.get_children())
                     for row in rows:
@@ -272,20 +329,29 @@ class addNewPerson:
         f=self.CustomerTable.focus()
         content=(self.CustomerTable.item(f))
         row=content['values']
-        self.var_cus_id.set(row[0])
-        self.var_name.set(row[1])
-        self.var_gender.set(row[2])
-        self.var_surety_name.set(row[3])
-        self.var_phone_no.set(row[4])
-        self.var_alter_no.set(row[5])
-        self.var_acc_type.set(row[6])
-        self.var_amount.set(row[7])
-        self.var_months.set(row[8])
-        self.var_issuedate.set(row[9])
-        self.var_lastdate.set(row[10])
-        self.var_proofs.set(row[11])
-        self.txt_address.delete('1.0',END)
-        self.txt_address.insert(END,row[12])
+        self.var_AccountId.set(row[0]),
+        self.var_CustomerName.set(row[1]),
+        self.var_CustomerMobile.set(row[2]),
+        self.var_SuretyName.set(row[3]),
+        self.var_PrincipleAmount.set(row[4]),
+        self.var_Months.set(row[5]),
+        self.var_ToatalAmount.set(row[6]),
+        self.var_IssueDate.set(row[7]),
+        self.var_LastDate.set(row[8]),
+        self.var_EMI.set(row[9]),
+        self.var_PayingAmount.set(row[10]),
+        self.var_BalanceAmount.set(row[11]),
+        self.var_TotalAmountPaid.set(row[12]),
+        self.var_Balance.set(row[13]),
+        self.var_TotalMonthsPaid.set(row[14]),
+        self.var_PaperCharges.set(row[15]),
+        self.var_ExtraPay.set(row[16]),
+        self.var_TotalExtra.set(row[17]),
+        self.var_OriginalAmount.set(row[18]),
+        self.var_PenalityAmount.set(row[19]),
+        self.var_TotalProfit.set(row[20]),
+        self.var_TotalLoss.set(row[21]),
+        self.var_Status.set(row[22])
 
 
 
@@ -306,28 +372,38 @@ class addNewPerson:
                 try:
 
                     # Execute the query
-                    if self.var_cus_id.get()=="":
+                    if self.var_AccountId.get()=="":
                         messagebox.showerror("Error",f"Customer Id should be required",parent=self.root)
                     else:
-                        cursor.execute("select * from Customers where ID=%s",(self.var_cus_id.get(),))
+                        cursor.execute("select * from Main where ID=%s",(self.var_AccountId.get(),))
                         row=cursor.fetchone()
                         if row==None:
                             messagebox.showerror("Error","Invalid Customer Id Please try correct one",parent=self.root)
                         else:
-                            cursor.execute('update Customers set CustomerName=%s,Gender=%s,SuretyName=%s,PhoneNumber=%s,AlternateNumber=%s,AccountType=%s,Amount=%s,Months=%s,IssueDate=%s,LastDate=%s,Proofs=%s,Address=%s where ID=%s',(
-                                            self.var_name.get(),
-                                            self.var_gender.get(),
-                                            self.var_surety_name.get(),
-                                            self.var_phone_no.get(),
-                                            self.var_alter_no.get(),
-                                            self.var_acc_type.get(),
-                                            self.var_amount.get(),
-                                            self.var_months.get(),
-                                            self.var_issuedate.get(),
-                                            self.var_lastdate.get(),
-                                            self.var_proofs.get(),
-                                            self.txt_address.get('1.0',END),
-                                            self.var_cus_id.get()
+                            cursor.execute('update Main set CustomerName=%s,Gender=%s,SuretyName=%s,PhoneNumber=%s,AlternateNumber=%s,AccountType=%s,Amount=%s,Months=%s,IssueDate=%s,LastDate=%s,Proofs=%s,Address=%s where ID=%s',(
+                                        self.var_AccountId.get(),
+                                        self.var_CustomerName.get(),
+                                        self.var_CustomerMobile.get(),
+                                        self.var_SuretyName.get(),
+                                        self.var_PrincipleAmount.get(),
+                                        self.var_Months.get(),
+                                        self.var_ToatalAmount.get(),
+                                        self.var_IssueDate.get(),
+                                        self.var_LastDate.get(),
+                                        self.var_EMI.get(),
+                                        self.var_PayingAmount.get(),
+                                        self.var_BalanceAmount.get(),
+                                        self.var_TotalAmountPaid.get(),
+                                        self.var_Balance.get(),
+                                        self.var_TotalMonthsPaid.get(),
+                                        self.var_PaperCharges.get(),
+                                        self.var_ExtraPay.get(),
+                                        self.var_TotalExtra.get(),
+                                        self.var_OriginalAmount.get(),
+                                        self.var_PenalityAmount.get(),
+                                        self.var_TotalProfit.get(),
+                                        self.var_TotalLoss.get(),
+                                        self.var_Status.get()
 
                             ))
                             con.commit()
@@ -357,17 +433,17 @@ class addNewPerson:
                 try:
 
                     # Execute the query
-                    if self.var_cus_id.get()=="":
+                    if self.var_AccountId.get()=="":
                         messagebox.showerror("Error",f"Customer Id should be required",parent=self.root)
                     else:
-                        cursor.execute("select * from Customers where ID=%s",(self.var_cus_id.get(),))
+                        cursor.execute("select * from Main where ID=%s",(self.var_AccountId.get(),))
                         row=cursor.fetchone()
                         if row==None:
                             messagebox.showerror("Error","Invalid Customer Id Please try correct one",parent=self.root)
                         else:
                             op=messagebox.askyesno("Confirm","Do you really want to Delter the Customer",parent=self.root)
                             if op==True:
-                                cursor.execute("delete from Customers where ID=%s",(self.var_cus_id.get(),))
+                                cursor.execute("delete from Main where ID=%s",(self.var_AccountId.get(),))
                                 con.commit()
                                 messagebox.showinfo("Delete","Customer Details Deleted Successfully",parent=self.root)
                                 self.clear()
@@ -380,10 +456,10 @@ class addNewPerson:
 
     #================creating show function==========
     def clear(self):
-        self.var_cus_id.set("")
-        self.var_name.set("")
+        self.var_AccountId.set("")
+        self.var_CustomerName.set("")
         self.var_gender.set("Select")
-        self.var_surety_name.set("")
+        self.var_SuretyName.set("")
         self.var_phone_no.set("")
         self.var_alter_no.set("")
         self.var_acc_type.set("Select")
@@ -417,7 +493,7 @@ class addNewPerson:
                     elif self.var_searchby.get()=="":
                         messagebox.showerror("Error","Search Input should be required",parent=self.root)
                     else:
-                        cursor.execute("select * from Customers where "+self.var_searchby.get()+" LIKE '%"+self.var_searchtxt.get()+"%'")
+                        cursor.execute("select * from Main where "+self.var_searchby.get()+" LIKE '%"+self.var_searchtxt.get()+"%'")
                         rows=cursor.fetchall()
                         if len(rows)!=0:
                             self.CustomerTable.delete(*self.CustomerTable.get_children())
