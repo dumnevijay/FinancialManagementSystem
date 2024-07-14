@@ -49,3 +49,27 @@ TotalLoss
 Status
 Proofs
 
+AccountId
+CustomerName
+CustomerMobile
+SuretyName
+PrincipleAmount
+Months
+TotalAmount
+IssueDate
+LastDate
+EMI
+PayingAmount
+BalanceAmount
+TotalAmountPaid
+Balance
+TotalMonthsPaid
+PaperCharges
+ExtraPay
+TotalExtra
+OriginalAmount
+PenalityAmount
+TotalProfit
+TotalLoss
+Status
+Proofs
