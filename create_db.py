@@ -75,7 +75,7 @@ def create_db():
                 SuretyName VARCHAR(100),
                 PrincipleAmount VARCHAR(100),
                 Months VARCHAR(100),
-                ToatalAmount VARCHAR(100),
+                TotalAmount VARCHAR(100),
                 IssueDate VARCHAR(100),
                 LastDate VARCHAR(100),
                 EMI VARCHAR(100),
@@ -93,6 +93,7 @@ def create_db():
                 TotalLoss VARCHAR(100),
                 Status VARCHAR(100),
                 Proofs VARCHAR(100),
+                Interest VARCHAR(100),
                 PRIMARY KEY (AccountId)
             )
             """
@@ -100,6 +101,7 @@ def create_db():
             cursor.execute(create_table_query)
             cursor.execute(create_transaction_table_query)
             cursor.execute(create_main_table_query)
+
 
             
     except Error as e:

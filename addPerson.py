@@ -3,6 +3,9 @@ from PIL import ImageTk,Image
 from tkinter import ttk,messagebox
 import mysql.connector
 from mysql.connector import Error
+import math
+import datetime
+from dateutil.relativedelta import relativedelta
 
 
 class addNewPerson:
@@ -15,6 +18,7 @@ class addNewPerson:
 
         #=========================
         # All Variables
+
 
         self.var_searchby=StringVar()
         self.var_searchtxt=StringVar()
@@ -42,6 +46,8 @@ class addNewPerson:
         self.var_TotalProfit=StringVar()
         self.var_TotalLoss=StringVar()
         self.var_Status=StringVar()
+        self.var_Proofs=StringVar()
+        self.var_Interest=StringVar()
 
         
 
@@ -115,6 +121,7 @@ class addNewPerson:
         lbl_penalityamount=Label(self.root,text="Penality Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=350)
         lbl_totalprofit=Label(self.root,text="Total Profit",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=400)
         lbl_totallosss=Label(self.root,text="Total Loss",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=450)
+        lbl_proofs=Label(self.root,text="Proofs",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=500)
     
     
         txt_papercharges=Entry(self.root,textvariable=self.var_PaperCharges,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=150)
@@ -124,6 +131,7 @@ class addNewPerson:
         txt_penalityamount=Entry(self.root,textvariable=self.var_PenalityAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=350)
         txt_totalprofit=Entry(self.root,textvariable=self.var_TotalProfit,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=400)
         txt_totallosss=Entry(self.root,textvariable=self.var_TotalLoss,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=450)
+        txt_proofs=Entry(self.root,textvariable=self.var_Proofs,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=500)
         
     
 
@@ -180,32 +188,6 @@ class addNewPerson:
         self.CustomerTable.heading("Status",text="Status")
         self.CustomerTable.heading("Proofs",text="Proofs")
         self.CustomerTable["show"]="headings"
-        
-        '''AccountId
-        CustomerName
-        CustomerMobile
-        SuretyName
-        PrincipleAmount
-        Months
-        TotalAmount
-        IssueDate
-        LastDate
-        EMI
-        PayingAmount
-        BalanceAmount
-        TotalAmountPaid
-        Balance
-        TotalMonthsPaid
-        PaperCharges
-        ExtraPay
-        TotalExtra
-        OriginalAmount
-        PenalityAmount
-        TotalProfit
-        TotalLoss
-        Status
-        Proofs'''
-        '''AccountId,CustomerName,CustomerMobile,SuretyName,PrincipleAmount,Months,TotalAmount,IssueDate,LastDate,EMI,PayingAmount,BalanceAmount,TotalAmountPaid,Balance,TotalMonthsPaid,PaperCharges,ExtraPay,TotalExtra,OriginalAmount,PenalityAmount,TotalProfit,TotalLoss,Status,Proofs'''
 
 
         #================headings width setting==========
@@ -264,7 +246,7 @@ class addNewPerson:
                         if row!=None:
                             messagebox.showerror("Error","This Customer Id already assigned, try a different one",parent=self.root)
                         else:
-                            cursor.execute("Insert into Main (AccountId,CustomerName,CustomerMobile,SuretyName,PrincipleAmount,Months,TotalAmount,IssueDate,LastDate,EMI,PayingAmount,BalanceAmount,TotalAmountPaid,Balance,TotalMonthsPaid,PaperCharges,ExtraPay,TotalExtra,OriginalAmount,PenalityAmount,TotalProfit,TotalLoss,Status,Proofs) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
+                            cursor.execute("Insert into Main (AccountId,CustomerName,CustomerMobile,SuretyName,PrincipleAmount,Months,TotalAmount,IssueDate,LastDate,EMI,PayingAmount,BalanceAmount,TotalAmountPaid,Balance,TotalMonthsPaid,PaperCharges,ExtraPay,TotalExtra,OriginalAmount,PenalityAmount,TotalProfit,TotalLoss,Status,Proofs,Interest) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
                                         self.var_AccountId.get(),
                                         self.var_CustomerName.get(),
                                         self.var_CustomerMobile.get(),
@@ -287,7 +269,10 @@ class addNewPerson:
                                         self.var_PenalityAmount.get(),
                                         self.var_TotalProfit.get(),
                                         self.var_TotalLoss.get(),
-                                        self.var_Status.get()
+                                        self.var_Status.get(),
+                                        self.var_Proofs.get(),
+                                        self.var_Interest.get()
+                                        
 
                             ))
                             con.commit()
@@ -328,6 +313,44 @@ class addNewPerson:
 
         except Exception as e:
             messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+    #================Calculation function==========
+    def monthly_details(self):
+        try:
+            # Connect to MySQL server
+            con = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='dumnevijay@20',
+                database="fms"
+            )
+            if con.is_connected():
+                
+                # Create a cursor object
+                cursor = con.cursor()
+                try:
+
+                    # Execute the query
+                    cursor.execute("select * from Main")
+                    rows=cursor.fetchall()
+                    self.CustomerTable.delete(*self.CustomerTable.get_children())
+                    '''amount = int(input("Amount:-"))
+                    months = int(input("Months:-"))
+                    interest = amount*months*0.03
+                    total_amount = int(amount+interest)
+                    emi = math.ceil(total_amount/months)
+                    print(amount,total_amount, months,emi)
+                    issue_date = datetime.date.today()
+                    last_emi_date = relativedelta(months=months)
+                    print(issue_date,issue_date+last_emi_date)
+                    paper_charges = int(amount*0.01)
+                    print(paper_charges)'''
+                    for row in rows:
+                        self.CustomerTable.insert('',END,values=row)
+                except Exception as e:
+                    messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+
+        except Exception as e:
+            messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
 
     #===========creating get_dat  function when were we click on below table show reflect on above==========
 
@@ -358,6 +381,7 @@ class addNewPerson:
         self.var_TotalProfit.set(row[20]),
         self.var_TotalLoss.set(row[21]),
         self.var_Status.set(row[22])
+        self.var_Proofs.set(row[22])
 
 
 
@@ -379,7 +403,7 @@ class addNewPerson:
 
                     # Execute the query
                     if self.var_AccountId.get()=="":
-                        messagebox.showerror("Error",f"Customer Id should be required",parent=self.root)
+                        messagebox.showerror("Error",f"Customer ID should be required",parent=self.root)
                     else:
                         cursor.execute("select * from Main where AccountId=%s",(self.var_AccountId.get(),))
                         row=cursor.fetchone()
@@ -409,7 +433,8 @@ class addNewPerson:
                                         self.var_PenalityAmount.get(),
                                         self.var_TotalProfit.get(),
                                         self.var_TotalLoss.get(),
-                                        self.var_Status.get()
+                                        self.var_Status.get(),
+                                        self.var_Proofs.get()
 
                             ))
                             con.commit()
@@ -442,7 +467,7 @@ class addNewPerson:
                     if self.var_AccountId.get()=="":
                         messagebox.showerror("Error",f"Customer Id should be required",parent=self.root)
                     else:
-                        cursor.execute("select * from Main where ID=%s",(self.var_AccountId.get(),))
+                        cursor.execute("select * from Main where AccountId=%s",(self.var_AccountId.get(),))
                         row=cursor.fetchone()
                         if row==None:
                             messagebox.showerror("Error","Invalid Customer Id Please try correct one",parent=self.root)
@@ -486,7 +511,8 @@ class addNewPerson:
         self.var_PenalityAmount.set("")
         self.var_TotalProfit.set("")
         self.var_TotalLoss.set("")
-        self.var_Status.get()
+        self.var_Status.set("")
+        self.var_Proofs.set("")
         self.show()
 
     def search(self):

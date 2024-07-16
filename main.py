@@ -3,6 +3,7 @@ from PIL import ImageTk,Image
 from addPerson import addNewPerson
 from individual import individualClass
 from datetime import datetime
+import time
 
 
 class FinancierApp:
@@ -65,6 +66,23 @@ class FinancierApp:
         #=============fotter====================
         lbl_footer = Label(self.root,text="FMS Financier Management System |  Developed by VIJAY & GEETHA \nFor any Technical Issue Contact : 1234567890",font=("times new roman",12),bg='#4d636d',fg='white').pack(side=BOTTOM,fill=X)
 
+
+        def update_clock():
+                     #=============clock====================
+            # Get the current date
+            current_date = datetime.now()
+            # Format the date as a string
+            date_string = time.strftime('%d-%b-%Y') 
+            time_string = time.strftime('%I:%M:%S %p') 
+            labl_clock_date = Label(font=("times new roman",15),bg='black',fg='white')
+            labl_clock_time = Label(font=("times new roman",15),bg='black',fg='white')
+            labl_clock_date.config(text=date_string)
+            labl_clock_date.place(x=35,y=5,width=300,height=30)
+            labl_clock_time.config(text=time_string)
+            labl_clock_time.place(x=35,y=37,width=300,height=30)
+            labl_clock_time.after(1000, update_clock)
+            
+        update_clock()
     '''def update_clock():
          #=============clock====================
         # Get the current date
@@ -75,9 +93,31 @@ class FinancierApp:
         labl_clock = Label(font=("times new roman",15),bg='lightblue',fg='white')
         labl_clock.config(text=f"Date : {date_string}  Time : {time_string}")
         labl_clock.place(x=0,y=70,relwidth=1,height=30)
-        #labl_clock.after(1000, update_clock)
+        labl_clock.after(1000, update_clock)
 
-    update_clock()'''
+    update_clock()
+                    import tkinter as tk
+                from tkinter import Label
+                import time
+
+                
+
+                # Set up the root window
+                root = tk.Tk()
+                root.title("Running Time Clock")
+
+                # Create and place the clock label
+                clock_label = Label(root, font=('Helvetica', 48), fg='black')
+                clock_label.pack(anchor='center')
+
+                # Initialize the clock
+                update_clock()
+
+                # Run the application
+                root.mainloop()
+
+    '''
+    
 
     #====================calling employee class with object ======================================
     def addPerson(self):
