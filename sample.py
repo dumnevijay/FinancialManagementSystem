@@ -6,10 +6,10 @@ from mysql.connector import Error
 import math
 import datetime
 from dateutil.relativedelta import relativedelta
-from saveUpdateDelete import saveUpdateDelete
+from saveUpdateDelete import saveUpdateDeleteClass
 
 
-class sample:
+class sample(saveUpdateDeleteClass):
     def __init__(self, root):
         self.root = root
         self.root.geometry("1400x800+0+0")
@@ -49,8 +49,6 @@ class sample:
         self.var_Status=StringVar()
         self.var_Proofs=StringVar()
         self.var_Interest=StringVar()
-
-        
 
         #========searchFrame=================
 
@@ -122,17 +120,18 @@ class sample:
         lbl_penalityamount=Label(self.root,text="Penality Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=350)
         lbl_totalprofit=Label(self.root,text="Total Profit",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=400)
         lbl_totallosss=Label(self.root,text="Total Loss",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=450)
-        lbl_proofs=Label(self.root,text="Proofs",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=500)
+        lbl_interest=Label(self.root,text="Interest",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=500)
     
     
-        txt_papercharges=Entry(self.root,textvariable=self.var_PaperCharges,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=150)
+        txt_papercharges=Entry(self.root,textvariable=self.var_PaperCharges,font=("goudy old style",15,"bold"),bg="lightblue",state='readonly').place(x=995,y=150)
         txt_extrapay=Entry(self.root,textvariable=self.var_ExtraPay,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=200)
         txt_totalextra=Entry(self.root,textvariable=self.var_TotalExtra,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=250)
         txt_originalamount=Entry(self.root,textvariable=self.var_OriginalAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=300)
         txt_penalityamount=Entry(self.root,textvariable=self.var_PenalityAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=350)
         txt_totalprofit=Entry(self.root,textvariable=self.var_TotalProfit,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=400)
         txt_totallosss=Entry(self.root,textvariable=self.var_TotalLoss,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=450)
-        txt_proofs=Entry(self.root,textvariable=self.var_Proofs,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=500)
+        txt_interest=Entry(self.root,textvariable=self.var_Interest,font=("goudy old style",15,"bold"),bg="lightblue",state='readonly').place(x=995,y=500)
+        
         
     
 
@@ -148,6 +147,8 @@ class sample:
         btn_update=Button(self.root,text="Update",font=("goudy old style",15),bg="green",fg="white",cursor="hand2",command=self.update).place(x=370,y=535,width=150,height=30)
         btn_delete=Button(self.root,text="Delete",font=("goudy old style",15),bg="red",fg="white",cursor="hand2",command=self.delete).place(x=540,y=535,width=150,height=30)
         btn_clear=Button(self.root,text="Clear",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.clear).place(x=730,y=535,width=150,height=30)
+        btn_cal_int=Button(self.root,text="Interest",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.calculate_interest).place(x=895,y=535,width=150,height=30)
+        btn_cal_emi=Button(self.root,text="Cal EMI",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.calculate_emi).place(x=1050,y=535,width=150,height=30)
 
 
         #========customer details=================
@@ -221,12 +222,37 @@ class sample:
 
         self.show()
 
-    def saveUpdateDelete(self):
+    """def saveUpdateDelete(self):
         self.new_win = Toplevel(self.root)
-        self.new_obj = saveUpdateDelete(self.new_win)
+        self.new_obj = saveUpdateDeleteClass(self.new_win)"""
 
+    def save(self):
+        super().save() 
+
+    def show(self):
+        super().show() 
+
+    def search(self):
+        super().search() 
     
+    def clear(self):
+        super().clear() 
+    
+    def monthly_details(self):
+        super().monthly_details() 
 
+    def get_data(self,ev):
+        super().get_data(ev) 
+
+    def update(self):
+        super().update() 
+
+    def delete(self): 
+        super().delete() 
+
+    def calculate_interest(self):
+        super().calculate_interest(self)
+        
    
 
 if __name__ == "__main__":
