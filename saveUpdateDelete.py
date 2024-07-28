@@ -9,8 +9,8 @@ from dateutil.relativedelta import relativedelta
 
 
 class saveUpdateDeleteClass:
-    def __init__(self, root):
-        self.root = root
+    """def __init__(self, root):
+        self.root = root"""
         
 
 #================creating save function==========

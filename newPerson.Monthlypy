@@ -80,7 +80,7 @@ class sample(saveUpdateDeleteClass):
         lbl_principleamount=Label(self.root,text="Principle Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=350)
         lbl_months=Label(self.root,text="Months",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=400)
         lbl_totalamount=Label(self.root,text="Total Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=450)
-        lbl_totalmonthspaid=Label(self.root,text="Total Months Paid",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=500)
+        """lbl_totalmonthspaid=Label(self.root,text="Total Months Paid",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=500)"""
 
         txt_accid=Entry(self.root,textvariable=self.var_AccountId,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=150)
         txt_cusname=Entry(self.root,textvariable=self.var_CustomerName,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=200)
@@ -89,7 +89,7 @@ class sample(saveUpdateDeleteClass):
         txt_principleamount=Entry(self.root,textvariable=self.var_PrincipleAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=350)
         txt_months=Entry(self.root,textvariable=self.var_Months,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=400)
         txt_totalamount=Entry(self.root,textvariable=self.var_TotalAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=450)
-        txt_totalmonthspaid=Entry(self.root,textvariable=self.var_TotalMonthsPaid,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=500)
+        """txt_totalmonthspaid=Entry(self.root,textvariable=self.var_TotalMonthsPaid,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=500)"""
 
         #========column_2=================
 
@@ -222,37 +222,6 @@ class sample(saveUpdateDeleteClass):
         self.CustomerTable.bind("<ButtonRelease-1>",self.get_data)
 
         self.show()
-
-    """def saveUpdateDelete(self):
-        self.new_win = Toplevel(self.root)
-        self.new_obj = saveUpdateDeleteClass(self.new_win)"""
-
-    """def save(self):
-        super().save() 
-
-    def show(self):
-        super().show() 
-
-    def search(self):
-        super().search() 
-    
-    def clear(self):
-        super().clear() 
-    
-    def monthly_details(self):
-        super().monthly_details() 
-
-    def get_data(self,ev):
-        super().get_data(ev) 
-
-    def update(self):
-        super().update() 
-
-    def delete(self): 
-        super().delete() 
-
-    def calculate_interest(self):
-        super().calculate_interest(self)"""
         
    
 
