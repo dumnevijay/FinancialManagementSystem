@@ -4,12 +4,14 @@ from tkinter import ttk,messagebox
 import mysql.connector
 from mysql.connector import Error
 import math
-import datetime
+from datetime import *
+from tkcalendar import *
 from dateutil.relativedelta import relativedelta
 from saveUpdateDelete import saveUpdateDeleteClass
+from getDate import get_date
 
 
-class sample(saveUpdateDeleteClass):
+class sample(saveUpdateDeleteClass,get_date):
     def __init__(self, root):
         super().__init__()
         self.root = root
@@ -29,26 +31,29 @@ class sample(saveUpdateDeleteClass):
         self.var_CustomerName=StringVar()
         self.var_CustomerMobile=StringVar()
         self.var_SuretyName=StringVar()
-        self.var_PrincipleAmount=StringVar()
-        self.var_BorrowAmount=StringVar()
+        self.var_PrincipleAmount=IntVar()
+        self.var_BorrowAmount=IntVar()
         self.var_IssueDate=StringVar()
         self.var_LastDate=StringVar()
-        self.var_DaysRunning=StringVar()
-        self.var_DaysPaid=StringVar()
-        self.var_DaysBalance=StringVar()
-        self.var_DailyPay=StringVar()
-        self.var_Due=StringVar()
-        self.var_ExtraPay=StringVar()
-        self.var_TotalAmountPaid=StringVar()
-        self.var_TotalBalance=StringVar()
-        self.var_PaperCharges=StringVar()
-        self.var_PenalityAmount=StringVar()
-        self.var_Rate=StringVar()
-        self.var_OriginalAmountTotal=StringVar()
-        self.var_TotalProfit=StringVar()
-        self.var_TotalLoss=StringVar()
+        self.var_DaysRunning=IntVar()
+        self.var_DaysPaid=IntVar()
+        self.var_DaysBalance=IntVar()
+        self.var_DailyPay=IntVar()
+        self.var_Due=IntVar()
+        self.var_ExtraPay=IntVar()
+        self.var_TotalAmountPaid=IntVar()
+        self.var_TotalBalance=IntVar()
+        self.var_PaperCharges=IntVar()
+        self.var_PenalityAmount=IntVar()
+        self.var_Rate=IntVar()
+        self.var_OriginalAmountTotal=IntVar()
+        self.var_TotalProfit=IntVar()
+        self.var_TotalLoss=IntVar()
         self.var_Status=StringVar()
+        self.var_PresentBalance=IntVar()
         self.var_Proofs=StringVar()
+
+        today = date.today()
 
         #========searchFrame=================
 
@@ -76,20 +81,23 @@ class sample(saveUpdateDeleteClass):
         lbl_cusname=Label(self.root,text="Customer Name",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=200)
         lbl_customermobile=Label(self.root,text="Customer Mobile",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=250)
         lbl_suretyname=Label(self.root,text="Surety Name",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=300)
-        lbl_principleamount=Label(self.root,text="Principle Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=350)
-        lbl_barrowamount=Label(self.root,text="Barrow Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=400)
-        lbl_issuedate=Label(self.root,text="Issue Date",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=450)
-        lbl_lastdate=Label(self.root,text="Last Date",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=500)
+        lbl_issuedate=Label(self.root,text="Issue Date",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=350)
+        lbl_lastdate=Label(self.root,text="Last Date",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=400)
+        lbl_principleamount=Label(self.root,text="Principle Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=450)
+        lbl_barrowamount=Label(self.root,text="Barrow Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=500)
 
         txt_accid=Entry(self.root,textvariable=self.var_AccountId,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=150)
         txt_cusname=Entry(self.root,textvariable=self.var_CustomerName,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=200)
         txt_customermobile=Entry(self.root,textvariable=self.var_CustomerMobile,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=250)
         txt_suretyname=Entry(self.root,textvariable=self.var_SuretyName,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=300)
-        txt_principleamount=Entry(self.root,textvariable=self.var_PrincipleAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=350)
-        txt_barrowamount=Entry(self.root,textvariable=self.var_BorrowAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=400)
-        txt_issuedate=Entry(self.root,textvariable=self.var_IssueDate,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=450)
-        txt_lastdate=Entry(self.root,textvariable=self.var_LastDate,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=500)
-
+        self.txt_issuedate=DateEntry(self.root,selectmode='day', year=today.year, day=today.day, month=today.month, textvariable=self.var_IssueDate,font=("goudy old style",15,"bold"),bg="lightblue")
+        self.txt_issuedate.place(x=220,y=350)
+        self.txt_lastdate=DateEntry(self.root,selectmode='day', year=today.year, day=today.day, month=today.month, textvariable=self.var_LastDate,font=("goudy old style",15,"bold"),bg="lightblue")
+        self.txt_lastdate.place(x=220,y=400)
+        txt_principleamount=Entry(self.root,textvariable=self.var_PrincipleAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=450)
+        txt_barrowamount=Entry(self.root,textvariable=self.var_BorrowAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=500)
+        print((self.txt_issuedate.get_date()-self.txt_lastdate.get_date()).days)
+        print(self.txt_lastdate.get_date())
         #========column_2=================
 
         lbl_daysrunning=Label(self.root,text="Days Running",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=455,y=150)
@@ -118,20 +126,20 @@ class sample(saveUpdateDeleteClass):
         lbl_penalityamount=Label(self.root,text="Penality Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=200)
         lbl_Rate=Label(self.root,text="Rate ",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=250)
         lbl_originalamount=Label(self.root,text="Original Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=300)
-        lbl_proofs=Label(self.root,text="Poofs",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=350)
+        lbl_PresentBalance=Label(self.root,text="Poofs",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=350)
         lbl_totalprofit=Label(self.root,text="Total Profit",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=400)
         lbl_totallosss=Label(self.root,text="Total Loss",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=450)
         lbl_status=Label(self.root,text="Status",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=840,y=500)
     
     
-        txt_papercharges=Entry(self.root,textvariable=self.var_PaperCharges,font=("goudy old style",15,"bold"),bg="lightblue",state='readonly').place(x=995,y=150)
+        txt_papercharges=Entry(self.root,textvariable=self.var_PaperCharges,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=150)
         txt_penalityamount=Entry(self.root,textvariable=self.var_PenalityAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=200)
         txt_totalextra=Entry(self.root,textvariable=self.var_Rate,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=250)
         txt_originalamount=Entry(self.root,textvariable=self.var_OriginalAmountTotal,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=300)
-        txt_proofs=Entry(self.root,textvariable=self.var_Proofs,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=350)
+        txt_PresentBalance=Entry(self.root,textvariable=self.var_PresentBalance,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=350)
         txt_totalprofit=Entry(self.root,textvariable=self.var_TotalProfit,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=400)
         txt_totallosss=Entry(self.root,textvariable=self.var_TotalLoss,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=450)
-        txt_status=Entry(self.root,textvariable=self.var_Status,font=("goudy old style",15,"bold"),bg="lightblue",state='readonly').place(x=995,y=500)
+        txt_status=Entry(self.root,textvariable=self.var_Status,font=("goudy old style",15,"bold"),bg="lightblue").place(x=995,y=500)
         
         
     
@@ -147,9 +155,10 @@ class sample(saveUpdateDeleteClass):
         btn_save=Button(self.root,text="Save",font=("goudy old style",15),bg="blue",fg="white",cursor="hand2",command=self.save).place(x=200,y=535,width=150,height=30)
         btn_update=Button(self.root,text="Update",font=("goudy old style",15),bg="green",fg="white",cursor="hand2",command=self.update).place(x=370,y=535,width=150,height=30)
         btn_delete=Button(self.root,text="Delete",font=("goudy old style",15),bg="red",fg="white",cursor="hand2",command=self.delete).place(x=540,y=535,width=150,height=30)
-        btn_clear=Button(self.root,text="Clear",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.clear).place(x=730,y=535,width=150,height=30)
-        btn_cal_int=Button(self.root,text="Interest",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.calculate_interest).place(x=895,y=535,width=150,height=30)
-        btn_cal_emi=Button(self.root,text="Cal EMI",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.calculate_emi).place(x=1050,y=535,width=150,height=30)
+        btn_clear=Button(self.root,text="Clear",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.clear).place(x=720,y=535,width=150,height=30)
+        btn_cal_int=Button(self.root,text="Calculate",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.calculate_paper_charges).place(x=895,y=535,width=150,height=30)
+        btn_cal_int=Button(self.root,text="Calculates",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.calculate_days).place(x=950,y=535,width=150,height=30)
+        
 
 
         #========customer details=================
@@ -158,7 +167,7 @@ class sample(saveUpdateDeleteClass):
         cus_frame.place(x=0,y=565,relwidth=1,height=130)
         scrolly=Scrollbar(cus_frame,orient=VERTICAL)
         scrollx=Scrollbar(cus_frame,orient=HORIZONTAL)
-        self.CustomerTable=ttk.Treeview(cus_frame,columns=("AccountId","CustomerName","CustomerMobile","SuretyName","PrincipleAmount","BorrowAmount","IssueDate","LastDate","DaysRunning","DaysPaid","DaysBalance","DailyPay","Due","ExtraPay","TotalMonthsPaid","TotalBalance","PaperCharges","PenalityAmount","Rate","OriginalAmountTotal","TotalProfit","TotalLoss","Status","Proofs"),yscrollcommand=scrolly.set,xscrollcommand=scrollx.set)
+        self.CustomerTable=ttk.Treeview(cus_frame,columns=("AccountId","CustomerName","CustomerMobile","SuretyName","PrincipleAmount","BorrowAmount","IssueDate","LastDate","DaysRunning","DaysPaid","DaysBalance","DailyPay","Due","ExtraPay","TotalAmountPaid","TotalBalance","PaperCharges","PenalityAmount","Rate","OriginalAmountTotal","TotalProfit","TotalLoss","Status","PresentBalance"),yscrollcommand=scrolly.set,xscrollcommand=scrollx.set)
         scrollx.pack(side=BOTTOM,fill=X)
         scrolly.pack(side=RIGHT,fill=Y)
         scrollx.config(command=self.CustomerTable.xview)
@@ -185,11 +194,11 @@ class sample(saveUpdateDeleteClass):
         self.CustomerTable.heading("PaperCharges",text="Paper Charges")
         self.CustomerTable.heading("PenalityAmount",text="Penality Amount")
         self.CustomerTable.heading("Rate",text="Rate")
-        self.CustomerTable.heading("OriginalAmountTotal",text="Original Amount Total")
+        self.CustomerTable.heading("OriginalAmountTotal",text="Original Amount")
         self.CustomerTable.heading("TotalProfit",text="Total Profit")
         self.CustomerTable.heading("TotalLoss",text="Total Loss")
         self.CustomerTable.heading("Status",text="Status")
-        self.CustomerTable.heading("Proofs",text="Proofs")
+        self.CustomerTable.heading("PresentBalance",text="PresentBalance")
         self.CustomerTable["show"]="headings"
        
 
@@ -213,11 +222,11 @@ class sample(saveUpdateDeleteClass):
         self.CustomerTable.column("PaperCharges",width=200)
         self.CustomerTable.column("PenalityAmount",width=200)
         self.CustomerTable.column("Rate",width=200)
-        self.CustomerTable.column("OriginalAmount",width=200)
+        self.CustomerTable.column("OriginalAmountTotal",width=200)
         self.CustomerTable.column("TotalProfit",width=200)
         self.CustomerTable.column("TotalLoss",width=200)
         self.CustomerTable.column("Status",width=200)
-        self.CustomerTable.column("Proofs",width=200)
+        self.CustomerTable.column("PresentBalance",width=200)
         self.CustomerTable.pack(fill=BOTH,expand=1)
         self.CustomerTable.bind("<ButtonRelease-1>",self.get_data)
 
@@ -247,15 +256,15 @@ class sample(saveUpdateDeleteClass):
                         if row!=None:
                             messagebox.showerror("Error","This Customer Id already assigned, try a different one",parent=self.root)
                         else:
-                            cursor.execute("Insert into DailyTable (AccountId,CustomerName,CustomerMobile,SuretyName,PrincipleAmount,BorrowAmount,IssueDate,LastDate,DaysRunning,DaysPaid,DaysBalance,DailyPay,Due,ExtraPay,TotalAmountPaid,TotalBalance,PaperCharges,PenalityAmount,Rate,OriginalAmountTotal,TotalProfit,TotalLoss,Status,Proofs) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
+                            cursor.execute("Insert into DailyTable (AccountId,CustomerName,CustomerMobile,SuretyName,PrincipleAmount,BorrowAmount,IssueDate,LastDate,DaysRunning,DaysPaid,DaysBalance,DailyPay,Due,ExtraPay,TotalAmountPaid,TotalBalance,PaperCharges,PenalityAmount,Rate,OriginalAmountTotal,TotalProfit,TotalLoss,Status,PresentBalance,Proofs) values(%s,%s,%s,%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s,%d,%s)",(
                                         self.var_AccountId.get(),
                                         self.var_CustomerName.get(),
                                         self.var_CustomerMobile.get(),
                                         self.var_SuretyName.get(),
                                         self.var_PrincipleAmount.get(),
                                         self.var_BorrowAmount.get(),
-                                        self.var_IssueDate.get(),
-                                        self.var_LastDate.get(),
+                                        self.txt_issuedate.get_date(),
+                                        self.txt_lastdate.get_date(),
                                         self.var_DaysRunning.get(),
                                         self.var_DaysPaid.get(),
                                         self.var_DaysBalance.get(),
@@ -271,6 +280,7 @@ class sample(saveUpdateDeleteClass):
                                         self.var_TotalProfit.get(),
                                         self.var_TotalLoss.get(),
                                         self.var_Status.get(),
+                                        self.var_PresentBalance.get(),
                                         self.var_Proofs.get()
                                         
 
@@ -313,44 +323,8 @@ class sample(saveUpdateDeleteClass):
 
         except Exception as e:
             messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
-    #================Calculation function==========
-    def monthly_details(self):
-        try:
-            # Connect to MySQL server
-            con = mysql.connector.connect(
-                host='localhost',
-                user='root',
-                password='dumnevijay@20',
-                database="fms"
-            )
-            if con.is_connected():
-                
-                # Create a cursor object
-                cursor = con.cursor()
-                try:
-
-                    # Execute the query
-                    cursor.execute("select * from DailyTable")
-                    rows=cursor.fetchall()
-                    self.CustomerTable.delete(*self.CustomerTable.get_children())
-                    '''amount = int(input("Amount:-"))
-                    months = int(input("Months:-"))
-                    interest = amount*months*0.03
-                    total_amount = int(amount+interest)
-                    emi = math.ceil(total_amount/months)
-                    print(amount,total_amount, months,emi)
-                    issue_date = datetime.date.today()
-                    last_emi_date = relativedelta(months=months)
-                    print(issue_date,issue_date+last_emi_date)
-                    paper_charges = int(amount*0.01)
-                    print(paper_charges)'''
-                    for row in rows:
-                        self.CustomerTable.insert('',END,values=row)
-                except Exception as e:
-                    messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
-
-        except Exception as e:
-            messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+    
+   
 
     #===========creating get_dat  function when were we click on below table show reflect on above==========
 
@@ -381,7 +355,7 @@ class sample(saveUpdateDeleteClass):
         self.var_TotalProfit.set(row[20]),
         self.var_TotalLoss.set(row[21]),
         self.var_Status.set(row[22]),
-        self.var_Proofs.set(row[23])
+        self.var_PresentBalance.set(row[23])
 
 
 
@@ -410,7 +384,7 @@ class sample(saveUpdateDeleteClass):
                         if row==None:
                             messagebox.showerror("Error","Invalid Customer Id Please try correct one",parent=self.root)
                         else:
-                            cursor.execute('update DailyTable set AccountId=%s,CustomerName=%s,CustomerMobile=%s,SuretyName=%s,PrincipleAmount=%s,BorrowAmount=%s,IssueDate=%s,LastDate=%s,DaysRunning=%s,DaysPaid=%s,DaysBalance=%s,DailyPay=%s,Due=%s,ExtraPay=%s,TotalAmountPaid=%s,TotalBalance=%s,PaperCharges=%s,PenalityAmount=%s,Rate=%s,OriginalAmountTotal=%s,TotalProfit=%s,TotalLoss=%s,Status=%s,Proofs=%s where AccountId=%s',(                           
+                            cursor.execute('update DailyTable set AccountId=%s,CustomerName=%s,CustomerMobile=%s,SuretyName=%s,PrincipleAmount=%s,BorrowAmount=%s,IssueDate=%s,LastDate=%s,DaysRunning=%s,DaysPaid=%s,DaysBalance=%s,DailyPay=%s,Due=%s,ExtraPay=%s,TotalAmountPaid=%s,TotalBalance=%s,PaperCharges=%s,PenalityAmount=%s,Rate=%s,OriginalAmountTotal=%s,TotalProfit=%s,TotalLoss=%s,Status=%s,PresentBalance=%s where AccountId=%s',(                           
                                         self.var_AccountId.get(),
                                         self.var_CustomerName.get(),
                                         self.var_CustomerMobile.get(),
@@ -434,7 +408,7 @@ class sample(saveUpdateDeleteClass):
                                         self.var_TotalProfit.get(),
                                         self.var_TotalLoss.get(),
                                         self.var_Status.get(),
-                                        self.var_Proofs.get()
+                                        self.var_PresentBalance.get()
 
                             ))
                             con.commit()
@@ -512,7 +486,7 @@ class sample(saveUpdateDeleteClass):
         self.var_TotalProfit.set("")
         self.var_TotalLoss.set("")
         self.var_Status.set("")
-        self.var_Proofs.set("")
+        self.var_PresentBalance.set("")
         self.show()
 
     def search(self):
@@ -546,7 +520,82 @@ class sample(saveUpdateDeleteClass):
                 except Exception as e:
                     messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)                   
         except Exception as e:
-            messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)    
+            messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root) 
+
+
+
+        
+    def calculate(self):
+        try:
+            PrincipleAmount=float(self.var_PrincipleAmount.get())
+            DaysRunning=float(self.var_DaysRunning.get())
+            DaysPaid=float(self.var_DaysPaid.get())
+            DaysBalance=float(self.var_DaysBalance.get())
+            DailyPay=float(self.var_DailyPay.get())
+            Due=float(self.var_Due.get())
+            ExtraPay=float(self.var_ExtraPay.get())
+            TotalAmountPaid=float(self.var_TotalAmountPaid.get())
+            TotalBalance=float(self.var_TotalBalance.get())
+            PenalityAmount=float(self.var_PenalityAmount.get())
+            Rate=float(self.var_Rate.get())
+            OriginalAmountTotal=float(self.var_OriginalAmountTotal.get())
+            TotalProfit=float(self.var_TotalProfit.get())
+            TotalLoss=float(self.var_TotalLoss.get())
+            
+            PaperCharges=float(self.var_PaperCharges.get()) * 0.01
+            BorrowAmount=float( PrincipleAmount - ( PrincipleAmount * 0.1 ) )
+            # calulating no of days
+            self.var_PaperCharges.set(PaperCharges)
+            self.var_BorrowAmount.set(BorrowAmount)
+            newTotalAmountPaid = ( ( DaysPaid * ( PrincipleAmount / DaysRunning ) ) + ExtraPay )
+            self.var_TotalAmountPaid.set(newTotalAmountPaid)
+            self.var_TotalBalance.set(PrincipleAmount-newTotalAmountPaid)
+            self.var_TotalProfit.set( ( ( ( PrincipleAmount - BorrowAmount ) / 100 ) *DaysPaid ) + PaperCharges+PenalityAmount)
+            newOriginalAmount = ( ( BorrowAmount / 100 ) * DaysPaid)
+            self.var_OriginalAmount.set(newOriginalAmount)
+            self.var_TotalLoss.set(BorrowAmount - newOriginalAmount)
+        except Exception as e:
+            # Handle case where the input is not a valid number
+            messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+
+    def calculate_days(self):
+        try:
+            # calulating no of days
+            noOfDays =  int((self.txt_lastdate.get_date() - self.txt_issuedate.get_date()).days)
+            self.var_DaysRunning.set(noOfDays)
+    
+        
+        except Exception as e:
+            # Handle case where the input is not a valid number
+            messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+
+    def calculate_papercharges(self):
+        try:
+            PrincipleAmount=float(self.var_PrincipleAmount.get())
+            PaperCharges=PrincipleAmount * 0.01
+            self.var_PaperCharges.set(PaperCharges)
+            BorrowAmount=float( PrincipleAmount - ( PrincipleAmount * 0.1 ) )
+            self.var_BorrowAmount.set(BorrowAmount)
+            
+        
+        except Exception as e:
+            # Handle case where the input is not a valid number
+            messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+    def calculates(self):
+        try:
+            PrincipleAmount=float(self.var_PrincipleAmount.get())
+            PaperCharges=PrincipleAmount * 0.01
+            self.var_PaperCharges.set(PaperCharges)
+            BorrowAmount=float( PrincipleAmount - ( PrincipleAmount * 0.1 ) )
+            self.var_BorrowAmount.set(BorrowAmount)
+            
+        
+        except Exception as e:
+            # Handle case where the input is not a valid number
+            messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+
+
+ 
 
 if __name__ == "__main__":
     root = Tk()

@@ -103,24 +103,25 @@ def create_db():
                 CustomerName VARCHAR(100),
                 CustomerMobile VARCHAR(100),
                 SuretyName VARCHAR(100),
-                PrincipleAmount VARCHAR(100),
-                BorrowAmount VARCHAR(100),
-                IssueDate VARCHAR(100),
-                LastDate VARCHAR(100),
-                DaysRunning VARCHAR(100),
-                DaysPaid VARCHAR(100),
-                DaysBalance VARCHAR(100),
-                DailyPay VARCHAR(100),
-                Due VARCHAR(100),
-                ExtraPay VARCHAR(100),
-                TotalAmountPaid VARCHAR(100),
-                TotalBalance VARCHAR(100),
-                PaperCharges VARCHAR(100),
-                PenalityAmount VARCHAR(100),
-                Rate VARCHAR(100),
-                OriginalAmount VARCHAR(100),
-                TotalProfit VARCHAR(100),
-                TotalLoss VARCHAR(100),
+                PrincipleAmount INT,
+                BorrowAmount INT,
+                IssueDate DATE,
+                LastDate DATE,
+                DaysRunning INT,
+                DaysPaid INT,
+                DaysBalance INT,
+                DailyPay INT,
+                Due INT,
+                ExtraPay INT,
+                TotalAmountPaid INT,
+                TotalBalance INT,
+                PaperCharges INT,
+                PenalityAmount INT,
+                Rate INT,
+                OriginalAmount INT,
+                TotalProfit INT,
+                TotalLoss INT,
+                PresentBalance INT,
                 Status VARCHAR(100),
                 Proofs VARCHAR(100),
                 PRIMARY KEY (AccountId)
@@ -130,6 +131,7 @@ def create_db():
             cursor.execute(create_table_query)
             cursor.execute(create_transaction_table_query)
             cursor.execute(create_main_table_query)
+            cursor.execute("""DROP TABLE DailyTable""")
             cursor.execute(create_daily_table_query)
 
 
