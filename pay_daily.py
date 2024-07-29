@@ -9,7 +9,6 @@ from tkcalendar import *
 from dateutil.relativedelta import relativedelta
 from saveUpdateDelete import saveUpdateDeleteClass
 from getDate import get_date
-from pay_daily import payDailyClass
 
 
 class sample(saveUpdateDeleteClass,get_date):
@@ -162,7 +161,6 @@ class sample(saveUpdateDeleteClass,get_date):
         btn_clear=Button(self.root,text="Clear",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.clear).place(x=580,y=535,width=150,height=30)
         btn_cal_int=Button(self.root,text="Calculate",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.calculate).place(x=740,y=535,width=150,height=30)
         btn_cal_int=Button(self.root,text="Calculates",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=900,y=535,width=150,height=30)
-        btn_dailypay=Button(self.root,text="Daily Pay",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.dailyPay).place(x=1065,y=535,width=150,height=30)
         
 
 
@@ -609,9 +607,7 @@ class sample(saveUpdateDeleteClass,get_date):
             # Handle case where the input is not a valid number
             messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
 
-    def dailyPay(self):
-        self.new_win = Toplevel(self.root)
-        self.new_obj = payDailyClass(self.new_win)
+
  
 
 if __name__ == "__main__":

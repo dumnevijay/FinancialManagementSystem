@@ -25,31 +25,39 @@ Status
 daily pay table contents.
 
 
-AccountId
-CustomerName
-CustomerMobile
-SuretyName
-PrincipleAmount
-BorrowAmount
-IssueDate
-LastDate
-DaysRunning
-DaysPaid
-DaysBalance
-DailyPay
-Due
-ExtraPay
-TotalAmountPaid
-TotalBalance
-PaperCharges
-PenalityAmount
-Rate
-OriginalAmountTotal
-TotalProfit
-TotalLoss
-Status
-Proofs
+AccountId=self.var_AccountId.get()
+CustomerName=self.var_CustomerName.get()
+CustomerMobile=self.var_CustomerMobile.get()
+SuretyName=self.var_SuretyName.get()
+PrincipleAmount=self.var_PrincipleAmount.get()
+BorrowAmount=self.var_BorrowAmount.get()
+IssueDate=self.var_IssueDate.get()
+LastDate=self.var_LastDate.get()
+DaysRunning=self.var_DaysRunning.get()
+DaysPaid=self.var_DaysPaid.get()
+DaysBalance=self.var_DaysBalance.get()
+DailyPay=self.var_DailyPay.get()
+Due=self.var_Due.get()
+ExtraPay=self.var_ExtraPay.get()
+TotalAmountPaid=self.var_TotalAmountPaid.get()
+TotalBalance=self.var_TotalBalance.get()
+PaperCharges=self.var_PaperCharges.get()
+PenalityAmount=self.var_PenalityAmount.get()
+Rate=self.var_Rate.get()
+OriginalAmountTotal=self.var_OriginalAmountTotal.get()
+TotalProfit=self.var_TotalProfit.get()
+TotalLoss=self.var_TotalLoss.get()
+Status=self.var_Status.get()
+Proofs=self.var_PresentBalance.get()
 
 
+"""AccountId CustomerName CustomerMobile SuretyName PrincipleAmount BorrowAmount IssueDate LastDate
+DaysRunning DaysPaid DaysBalance DailyPay Due ExtraPay TotalAmountPaid TotalBalance
+PaperCharges PenalityAmount Rate OriginalAmountTotal TotalProfit TotalLoss Status Proofs"""
+
+AccountId, CustomerName, CustomerMobile, SuretyName, PrincipleAmount, BorrowAmount, IssueDate, LastDate, DaysRunning, DaysPaid, DaysBalance, DailyPay, Due, ExtraPay, TotalAmountPaid, TotalBalance, PaperCharges, PenalityAmount, Rate, OriginalAmount, TotalProfit, TotalLoss, PresentBalance, Status, Proofs
+
+"""AccountId, CustomerName, CustomerMobile, SuretyName, PrincipleAmount, BorrowAmount, IssueDate, LastDate, DaysRunning, DaysPaid, DaysBalance, DailyPay, Due, ExtraPay, TotalAmountPaid, TotalBalance, PaperCharges, PenalityAmount, Rate, OriginalAmount, TotalProfit, TotalLoss, PresentBalance, Status, Proofs"""
 
 
+"""TransactionId AccountId CustomerName PaidTime PaidDate PaidAmount """

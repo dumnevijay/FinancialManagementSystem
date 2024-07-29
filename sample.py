@@ -222,37 +222,6 @@ class sample(saveUpdateDeleteClass):
         self.CustomerTable.bind("<ButtonRelease-1>",self.get_data)
 
         self.show()
-
-    """def saveUpdateDelete(self):
-        self.new_win = Toplevel(self.root)
-        self.new_obj = saveUpdateDeleteClass(self.new_win)"""
-
-    """def save(self):
-        super().save() 
-
-    def show(self):
-        super().show() 
-
-    def search(self):
-        super().search() 
-    
-    def clear(self):
-        super().clear() 
-    
-    def monthly_details(self):
-        super().monthly_details() 
-
-    def get_data(self,ev):
-        super().get_data(ev) 
-
-    def update(self):
-        super().update() 
-
-    def delete(self): 
-        super().delete() 
-
-    def calculate_interest(self):
-        super().calculate_interest(self)"""
         
    
 

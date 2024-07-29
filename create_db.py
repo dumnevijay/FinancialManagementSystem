@@ -98,7 +98,38 @@ def create_db():
             )
             """
             create_daily_table_query = """
-            CREATE TABLE IF NOT EXISTS DailyTable (
+            CREATE TABLE IF NOT EXISTS Daily (
+                AccountId INT AUTO_INCREMENT,
+                CustomerName VARCHAR(100),
+                CustomerMobile VARCHAR(100),
+                SuretyName VARCHAR(100),
+                PrincipleAmount VARCHAR(100),
+                BorrowAmount VARCHAR(100),
+                IssueDate VARCHAR(100),
+                LastDate VARCHAR(100),
+                DaysRunning VARCHAR(100),
+                DaysPaid VARCHAR(100),
+                DaysBalance VARCHAR(100),
+                DailyPay VARCHAR(100),
+                Due VARCHAR(100),
+                ExtraPay VARCHAR(100),
+                TotalAmountPaid VARCHAR(100),
+                TotalBalance VARCHAR(100),
+                PaperCharges VARCHAR(100),
+                PenalityAmount VARCHAR(100),
+                Rate VARCHAR(100),
+                OriginalAmount VARCHAR(100),
+                TotalProfit VARCHAR(100),
+                TotalLoss VARCHAR(100),
+                PresentBalance VARCHAR(100),
+                Status VARCHAR(100),
+                Proofs VARCHAR(100),
+                PRIMARY KEY (AccountId)
+            )
+            """
+
+            create_daily_report_query = """
+            CREATE TABLE IF NOT EXISTS DailyReport (
                 AccountId INT AUTO_INCREMENT,
                 CustomerName VARCHAR(100),
                 CustomerMobile VARCHAR(100),
@@ -127,16 +158,29 @@ def create_db():
                 PRIMARY KEY (AccountId)
             )
             """
+            create_dailypaid_report_query = """
+            CREATE TABLE DailyTransactions (
+            TransactionId INT AUTO_INCREMENT PRIMARY KEY,
+            AccountId INT,
+            CustomerName VARCHAR(255),
+            PaidTime TIME,
+            PaidDatePaid DATE,
+            PaidAmount DECIMAL(10, 2),
+            FOREIGN KEY (AccountId) REFERENCES Daily(AccountId)
+            )
+            """
 
             cursor.execute(create_table_query)
             cursor.execute(create_transaction_table_query)
             cursor.execute(create_main_table_query)
-            cursor.execute("""DROP TABLE DailyTable""")
+            cursor.execute(create_dailypaid_report_query)
+            cursor.execute(create_daily_report_query)
             cursor.execute(create_daily_table_query)
 
 
             
     except Error as e:
+        print(e)
         messagebox.showerror(f"Error: 'database error {e}'")
     
     finally:
