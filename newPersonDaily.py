@@ -95,8 +95,9 @@ class sample(saveUpdateDeleteClass,get_date):
         txt_suretyname=Entry(self.root,textvariable=self.var_SuretyName,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=300)
         self.txt_issuedate=DateEntry(self.root,selectmode='day', year=today.year, day=today.day, month=today.month, textvariable=self.var_IssueDate,font=("goudy old style",15,"bold"),bg="lightblue")
         self.txt_issuedate.place(x=220,y=350)
-        self.txt_lastdate=DateEntry(self.root,selectmode='day', year=today.year, day=today.day, month=today.month, textvariable=self.var_LastDate,font=("goudy old style",15,"bold"),bg="lightblue")
-        self.txt_lastdate.place(x=220,y=400)
+        """self.txt_lastdate=DateEntry(self.root,selectmode='day', year=today.year, day=today.day, month=today.month, textvariable=self.var_LastDate,font=("goudy old style",15,"bold"),bg="lightblue")
+        self.txt_lastdate.place(x=220,y=400)"""
+        txt_lastdate=Entry(self.root,textvariable=self.var_LastDate,font=("goudy old style",15,"bold"),bg="lightblue",state='readonly').place(x=220,y=400)
         txt_principleamount=Entry(self.root,textvariable=self.var_PrincipleAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=450)
         txt_barrowamount=Entry(self.root,textvariable=self.var_BorrowAmount,font=("goudy old style",15,"bold"),bg="lightblue").place(x=220,y=500)
 
@@ -160,9 +161,10 @@ class sample(saveUpdateDeleteClass,get_date):
         btn_update=Button(self.root,text="Update",font=("goudy old style",15),bg="green",fg="white",cursor="hand2",command=self.update).place(x=260,y=535,width=150,height=30)
         btn_delete=Button(self.root,text="Delete",font=("goudy old style",15),bg="red",fg="white",cursor="hand2",command=self.delete).place(x=420,y=535,width=150,height=30)
         btn_clear=Button(self.root,text="Clear",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.clear).place(x=580,y=535,width=150,height=30)
-        btn_cal_int=Button(self.root,text="Calculate",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.calculate).place(x=740,y=535,width=150,height=30)
+        btn_cal_int=Button(self.root,text="Calculate Days",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.calculate_days).place(x=740,y=535,width=150,height=30)
         btn_cal_int=Button(self.root,text="Calculates",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=900,y=535,width=150,height=30)
         btn_dailypay=Button(self.root,text="Daily Pay",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.dailyPay).place(x=1065,y=535,width=150,height=30)
+        btn_dailypay=Button(self.root,text="Refresh",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.personshow).place(x=1220,y=535,width=100,height=30)
         
 
 
@@ -237,7 +239,7 @@ class sample(saveUpdateDeleteClass,get_date):
         self.CustomerTable.pack(fill=BOTH,expand=1)
         self.CustomerTable.bind("<ButtonRelease-1>",self.get_data)
 
-        self.show()
+        self.personshow()
         
     def save(self):
         try:
@@ -272,7 +274,7 @@ class sample(saveUpdateDeleteClass,get_date):
                                         self.var_PrincipleAmount.get(),
                                         self.var_BorrowAmount.get(),
                                         self.txt_issuedate.get_date(),
-                                        self.txt_lastdate.get_date(),
+                                        self.var_LastDate.get(),
                                         self.var_DaysRunning.get(),
                                         self.var_DaysPaid.get(),
                                         self.var_DaysBalance.get(),
@@ -305,7 +307,7 @@ class sample(saveUpdateDeleteClass,get_date):
             messagebox.showerror("Error",f"{str(e)}",parent=self.root)
 
     #================creating show function==========
-    def show(self):
+    def personshow(self):
         try:
             # Connect to MySQL server
             con = mysql.connector.connect(
@@ -402,7 +404,7 @@ class sample(saveUpdateDeleteClass,get_date):
                                         self.var_PrincipleAmount.get(),
                                         self.var_BorrowAmount.get(),
                                         self.txt_issuedate.get_date(),
-                                        self.txt_lastdate.get_date(),
+                                        self.var_LastDate.get(),
                                         self.var_DaysRunning.get(),
                                         self.var_DaysPaid.get(),
                                         self.var_DaysBalance.get(),
@@ -424,7 +426,7 @@ class sample(saveUpdateDeleteClass,get_date):
                             ))
                             con.commit()
                             messagebox.showinfo("Customer Details Updated Successfully",parent=self.root)
-                            self.show()
+                            self.personshow()
 
                 except Exception as e:
                     print(e)
@@ -500,7 +502,7 @@ class sample(saveUpdateDeleteClass,get_date):
         self.var_Status.set("")
         self.var_PresentBalance.set("")
         self.var_Proofs.set("")
-        self.show()
+        self.personshow()
 
     def search(self):
         try:
@@ -557,7 +559,6 @@ class sample(saveUpdateDeleteClass,get_date):
             
             PaperCharges=float(self.var_PaperCharges.get()) * 0.01
             BorrowAmount=float( PrincipleAmount - ( PrincipleAmount * 0.1 ) )
-            noOfDays =  int((self.txt_lastdate.get_date() - self.txt_issuedate.get_date()).days)
             self.var_DaysRunning.set(noOfDays)
             # calulating no of days
             self.var_PaperCharges.set(PaperCharges)
@@ -576,8 +577,9 @@ class sample(saveUpdateDeleteClass,get_date):
     def calculate_days(self):
         try:
             # calulating no of days
-            noOfDays =  int((self.txt_lastdate.get_date() - self.txt_issuedate.get_date()).days)
-            self.var_DaysRunning.set(noOfDays)
+            current_date = datetime.now().date()
+            future_date = current_date + timedelta(days=self.var_DaysRunning.get())
+            self.var_LastDate.set(future_date.strftime('%d-%m-%Y'))
     
         
         except Exception as e:
