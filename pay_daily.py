@@ -8,11 +8,11 @@ from datetime import *
 from tkcalendar import *
 from dateutil.relativedelta import relativedelta
 from saveUpdateDelete import saveUpdateDeleteClass
-from getDate import get_date
+from outPut import output
 
 
 
-class payDailyClass(saveUpdateDeleteClass,get_date):
+class payDailyClass(saveUpdateDeleteClass):
     def __init__(self, root):
         super().__init__()
         self.root = root
@@ -63,7 +63,7 @@ class payDailyClass(saveUpdateDeleteClass,get_date):
         lbl_accid=Label(self.root,text="Account ID",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=150)
         lbl_cusname=Label(self.root,text="Customer Name",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=200)
         lbl_customermobile=Label(self.root,text="Amount",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=250)
-        """lbl_paiddate=Label(self.root,text="Paid Date",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=300)"""
+        """lbl_paiddate=Label(self.root,text="Print",font=("goudy old style",15,"bold"),bg="white",fg="black").place(x=50,y=300)"""
         
 
         
@@ -78,9 +78,8 @@ class payDailyClass(saveUpdateDeleteClass,get_date):
         btn_Getname=Button(self.root,text="Get Name",font=("goudy old style",15),bg="blue",fg="white",cursor="hand2",command=self.get_name).place(x=100,y=370,width=150,height=30)
         btn_Pay=Button(self.root,text="Pay",font=("goudy old style",15),bg="green",fg="white",cursor="hand2",command=self.Pay).place(x=260,y=370,width=150,height=30)
         btn_clear=Button(self.root,text="Clear",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.clear).place(x=420,y=370,width=150,height=30)
-        
-        """btn_delete=Button(self.root,text="Delete",font=("goudy old style",15),bg="red",fg="white",cursor="hand2",command=self.delete).place(x=420,y=230,width=150,height=30)
-        btn_clear=Button(self.root,text="Clear",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.clear).place(x=580,y=230,width=150,height=30)
+        btn_delete=Button(self.root,text="print",font=("goudy old style",15),bg="red",fg="white",cursor="hand2",command=self.showPrint).place(x=580,y=370,width=150,height=30)
+        """btn_clear=Button(self.root,text="Clear",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.clear).place(x=580,y=230,width=150,height=30)
         btn_cal_int=Button(self.root,text="Calculate",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2",command=self.calculate).place(x=740,y=230,width=150,height=30)
         btn_cal_int=Button(self.root,text="Calculates",font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=900,y=230,width=150,height=30)"""
         
@@ -200,8 +199,11 @@ class payDailyClass(saveUpdateDeleteClass,get_date):
 
                     # Execute the query
                     cursor.execute("""select CustomerName from Daily where AccountId=%s"""%(self.var_AccountId.get()))
-                    rows=cursor.fetchall()
-                    self.var_CustomerName.set(rows[0][0])
+                    if(cursor.fetchall()!="[]"):
+                        messagebox.showerror("Error",f"Enter A Valid Account Id",parent=self.root)
+                    else:
+                        rows=cursor.fetchall()
+                        self.var_CustomerName.set(rows[0][0])
                 except Exception as e:
                     messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
 
@@ -229,6 +231,37 @@ class payDailyClass(saveUpdateDeleteClass,get_date):
                     self.CustomerTable.delete(*self.CustomerTable.get_children())
                     for row in rows:
                         self.CustomerTable.insert('',END,values=row)
+                except Exception as e:
+                    messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+
+        except Exception as e:
+            messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+
+    def showPrint(self):
+        try:
+            # Connect to MySQL server
+            con = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='dumnevijay@20',
+                database="fms"
+            )
+            if con.is_connected():
+                
+                # Create a cursor object
+                cursor = con.cursor()
+                try:
+
+                    # Execute the query
+                    
+                    data = []
+                    for item in self.CustomerTable.get_children():
+                        row = self.CustomerTable.item(item, 'values')
+                        data.append(row)
+
+                    """cursor.execute("select * from DailyTransactions")
+                    rows=cursor.fetchall()"""
+                    output.save_and_print_txt(data)
                 except Exception as e:
                     messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
 

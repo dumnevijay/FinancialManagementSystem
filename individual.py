@@ -6,6 +6,7 @@ from mysql.connector import Error
 import math
 import datetime
 from dateutil.relativedelta import relativedelta
+from outPut import output
 
 
 class individualClass:
@@ -64,6 +65,7 @@ class individualClass:
 
         txt_search=Entry(SearchFrame,textvariable=self.var_searchtxt,font=("goudy old style",15),bg="lightyellow").place(x=290,y=10)
         btn_search=Button(SearchFrame,text="Search",font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2",command=self.search).place(x=500,y=9,width=150,height=30)
+        btn_search=Button(SearchFrame,text="Print",font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2",command=self.showPrint).place(x=660,y=9,width=75,height=30)
 
         #========title=================
 
@@ -313,6 +315,38 @@ class individualClass:
 
         except Exception as e:
             messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+
+    def showPrint(self):
+        try:
+            # Connect to MySQL server
+            con = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='dumnevijay@20',
+                database="fms"
+            )
+            if con.is_connected():
+                
+                # Create a cursor object
+                cursor = con.cursor()
+                try:
+
+                    # Execute the query
+                    
+                    data = []
+                    for item in self.CustomerTable.get_children():
+                        row = self.CustomerTable.item(item, 'values')
+                        data.append(row)
+
+                    """cursor.execute("select * from DailyTransactions")
+                    rows=cursor.fetchall()"""
+                    output.save_and_print_txt(data)
+                except Exception as e:
+                    messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+
+        except Exception as e:
+            messagebox.showerror("Error",f"Error due to {str(e)}",parent=self.root)
+
     #================Calculation function==========
     def monthly_details(self):
         try:
